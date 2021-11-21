@@ -32,8 +32,7 @@ object SkinManager : Observable() {
 
                 val appResource = XApp.getApp().resources
 
-                val skinResource =
-                    Resources(assetManager, appResource.displayMetrics, appResource.configuration)
+                val skinResource = Resources(assetManager, appResource.displayMetrics, appResource.configuration)
 
                 val packageManager = XApp.getApp().packageManager
 

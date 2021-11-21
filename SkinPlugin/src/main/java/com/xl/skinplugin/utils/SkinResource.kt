@@ -4,12 +4,11 @@ import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 object SkinResource {
-    lateinit var skinPackageName: String
-    var isDefaultSkin = true
+    private lateinit var skinPackageName: String
+    private var isDefaultSkin = true
 
-    val mResource = XApp.getApp().resources
-
-    var skinResource: Resources? = null
+    private val mResource = XApp.getApp().resources
+    private var skinResource: Resources? = null
 
     fun reset() {
         skinResource = null
@@ -27,7 +26,7 @@ object SkinResource {
      * 1.通过原始app中的resId(R.color.XX)获取到自己的 名字
      * 2.根据名字和类型获取皮肤包中的ID
      */
-    fun getIdentifier(resId: Int): Int {
+    private fun getIdentifier(resId: Int): Int {
         if (isDefaultSkin) {
             return resId
         }

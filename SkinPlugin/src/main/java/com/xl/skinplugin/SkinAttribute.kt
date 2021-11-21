@@ -45,9 +45,9 @@ class SkinAttribute {
                     continue
                 }
                 // 以 ？开头的表示使用 属性
-                var resId: Int = if (attributeValue.startsWith("?")) {
+                val resId: Int = if (attributeValue.startsWith("?")) {
                     val attrId = attributeValue.substring(1).toInt()
-                    SkinThemeUtil.getResId(view.context, intArrayOf(attrId)).get(0)
+                    SkinThemeUtil.getResId(view.context, intArrayOf(attrId))[0]
                 } else {
                     // 正常以 @ 开头
                     attributeValue.substring(1).toInt()
@@ -56,7 +56,7 @@ class SkinAttribute {
                 mSkinPars.add(skinPair)
             }
         }
-        if (!mSkinPars.isEmpty() || view is SkinViewSupport) {
+        if (mSkinPars.isNotEmpty() || view is SkinViewSupport) {
             val skinView = SkinView(view, mSkinPars)
             // 如果选择过皮肤 ，调用 一次 applySkin 加载皮肤的资源
             skinView.applySkin()
@@ -75,8 +75,8 @@ class SkinAttribute {
     }
 
     internal class SkinView(
-        var view: View, //这个View的能被 换肤的属性与它对应的id 集合
-        var skinPairs: List<SkinPair>
+        private var view: View, //这个View的能被 换肤的属性与它对应的id 集合
+        private var skinPairs: List<SkinPair>
     ) {
         /**
          * 对一个View中的所有的属性进行修改
@@ -134,13 +134,11 @@ class SkinAttribute {
         }
     }
 
-    internal class SkinPair(//属性名
-        var attributeName: String, //对应的资源id
+    internal class SkinPair(
+        //属性名
+        var attributeName: String,
+        //对应的资源id
         var resId: Int
-    ) {
-        init {
-            resId = resId
-        }
-    }
+    )
 
 }

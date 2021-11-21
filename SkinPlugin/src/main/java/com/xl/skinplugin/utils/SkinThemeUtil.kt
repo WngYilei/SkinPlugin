@@ -31,7 +31,7 @@ object SkinThemeUtil {
     }
 
 
-    open fun updateStatusBarColor(activity: Activity) {
+    fun updateStatusBarColor(activity: Activity) {
         Log.e("TAG", "updateStatusBarColor: ")
         //获得 statusBarColor 与 nanavigationBarColor (状态栏颜色)
         //当与 colorPrimaryDark  不同时 以statusBarColor为准

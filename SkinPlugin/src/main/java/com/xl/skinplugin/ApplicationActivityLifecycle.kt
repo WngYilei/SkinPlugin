@@ -50,9 +50,6 @@ class ApplicationActivityLifecycle constructor(observable: Observable) :
             e.printStackTrace()
         }
 
-
-        //使用factory2 设置布局加载工程
-
         //使用factory2 设置布局加载工程
         val skinLayoutInflaterFactory = SkinLayoutFactory(activity)
 

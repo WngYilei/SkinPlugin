@@ -50,7 +50,7 @@ class SkinLayoutFactory constructor(// 用于获取窗口的状态框的信息
         //这就是我们加入的逻辑
         if (null != view) {
             //加载属性
-            skinAttribute!!.look(view, attrs)
+            skinAttribute.look(view, attrs)
         }
         return view
 
@@ -82,7 +82,7 @@ class SkinLayoutFactory constructor(// 用于获取窗口的状态框的信息
 
 
     private fun findConstructor(context: Context, name: String): Constructor<out View?>? {
-        var constructor: Constructor<out View?>? = mConstructorMap.get(name)
+        var constructor: Constructor<out View?>? = mConstructorMap[name]
         if (constructor == null) {
             try {
                 val clazz = context.classLoader.loadClass(name).asSubclass(
@@ -90,7 +90,7 @@ class SkinLayoutFactory constructor(// 用于获取窗口的状态框的信息
                 )
                 constructor =
                     clazz.getConstructor(*mConstructorSignature)
-                mConstructorMap.put(name, constructor)
+                mConstructorMap[name] = constructor
             } catch (e: Exception) {
             }
         }
@@ -105,6 +105,6 @@ class SkinLayoutFactory constructor(// 用于获取窗口的状态框的信息
     override fun update(o: Observable?, arg: Any?) {
         Log.e("TAG", "update: ")
         SkinThemeUtil.updateStatusBarColor(activity)
-        skinAttribute!!.applySkin()
+        skinAttribute.applySkin()
     }
 }
