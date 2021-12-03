@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Skin">
         <activity
+            android:name=".SkinActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

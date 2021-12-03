@@ -1,5 +1,6 @@
 package com.xl.skinplugin
 
+import android.app.Activity
 import android.app.Application
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
@@ -12,11 +13,17 @@ import java.lang.Exception
 import java.util.*
 
 object SkinManager : Observable() {
+    lateinit var skinActivityLifecycle: ApplicationActivityLifecycle
     fun init(application: Application) {
-        val skinActivityLifecycle = ApplicationActivityLifecycle(this)
+        skinActivityLifecycle = ApplicationActivityLifecycle(this)
         application.registerActivityLifecycleCallbacks(skinActivityLifecycle)
         loadSKin(SkinCache.getSkinPath())
     }
+
+    fun initCreate(activity: Activity) {
+        skinActivityLifecycle.initCreate(activity)
+    }
+
     fun loadSKin(skinPath: String?) {
         if (skinPath == null || skinPath.isEmpty()) {
             SkinResource.reset()
@@ -32,7 +39,8 @@ object SkinManager : Observable() {
 
                 val appResource = XApp.getApp().resources
 
-                val skinResource = Resources(assetManager, appResource.displayMetrics, appResource.configuration)
+                val skinResource =
+                    Resources(assetManager, appResource.displayMetrics, appResource.configuration)
 
                 val packageManager = XApp.getApp().packageManager
 
